@@ -11,6 +11,7 @@
     font-weight: 700;
     display: flex;
     align-items: center;
+    margin-left: 4px;
     color: red !important;
 }
 .app-header-logo span{

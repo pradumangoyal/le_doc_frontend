@@ -19,3 +19,12 @@ export const setPatients = () => {
         })
     }
 }
+
+export const addPatient = (data) => {
+    return dispatch => {
+        dispatch({
+            type: 'ADD_PATIENT',
+            payload: data
+        })
+    }
+}
