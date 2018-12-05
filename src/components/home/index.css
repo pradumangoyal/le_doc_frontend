@@ -7,7 +7,7 @@
     overflow-y: auto;
 }
 .home-welcome{
-    width: calc(100% - 13em);
+    width: 100%;
     color: #0d0d0d;
     display: flex;
     flex-direction: column;
@@ -25,4 +25,8 @@
 }
 .home-welcome-patients-logo{
     font-size: 2em;
+}
+.home-container{
+    display: flex;
+    padding-top: 0.5em;
 }

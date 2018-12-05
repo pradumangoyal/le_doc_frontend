@@ -8,9 +8,6 @@ class Home extends React.Component{
     render(){
         return(
             <div className='home-main-wrapper'>
-                <div className='home-sidebar'>
-                    <Sidebar />
-                </div>
                 <div className='home-welcome'>
                     <div>
                         <div className='home-welcome-heading'>Welcome,</div>

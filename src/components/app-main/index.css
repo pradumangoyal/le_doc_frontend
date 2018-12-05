@@ -3,3 +3,6 @@
     flex-grow: 1;
     overflow-y: auto;
 }
+.home-container{
+    width: calc(100% - 13em);
+}
