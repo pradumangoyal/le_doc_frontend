@@ -1,0 +1,5 @@
+.app-footer-wrapper{
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid #D9DDDC;
+}

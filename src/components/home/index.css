@@ -1,0 +1,28 @@
+.home-main-wrapper{
+    display: flex;
+    width: 100%;
+}
+.home-sidebar{
+    height: 100%;
+    overflow-y: auto;
+}
+.home-welcome{
+    width: calc(100% - 13em);
+    color: #0d0d0d;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.home-welcome-heading{
+    font-size: 2em;
+}
+.home-welcome-desc{
+    font-size: 1.5em;
+}
+.home-welcome-patients{
+    font-size: 1em;
+}
+.home-welcome-patients-logo{
+    font-size: 2em;
+}
