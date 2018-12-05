@@ -7,5 +7,17 @@ export function urlPatients () {
 }
 
 export function urlUsernameAvailaible(word) {
-    return `patients/username_available/?username=${word}`
+    return `/patients/username_available/?username=${word}`
+}
+
+export function urlPatientDetails(x) {
+    return `/patients/patient_list/${x}`
+}
+
+export function urlPostReports(active) {
+    return `/${active}/list/`
+}
+
+export function urlOperate(active, id) {
+    return `/${active}/operate/?id=${id}`
 }

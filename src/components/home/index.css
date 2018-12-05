@@ -3,7 +3,6 @@
     width: 100%;
 }
 .home-sidebar{
-    height: 100%;
     overflow-y: auto;
 }
 .home-welcome{
@@ -29,4 +28,6 @@
 .home-container{
     display: flex;
     padding-top: 0.5em;
+    overflow-x: auto;
+    overflow-y: auto;
 }
