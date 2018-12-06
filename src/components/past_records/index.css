@@ -1,0 +1,112 @@
+.past-record-wrapper{
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+.past-record-main{
+    width: 100%;
+    height: 100%;
+}
+.past-record-heading{
+    text-align: center;
+}
+.past-record-step{
+    margin: auto;
+    width: 40em;
+}
+.set-patient-wrapper{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.set-patient-input{
+    width: 35em;
+    text-align: center;
+}
+.patient-profile-wrapper{
+    display: flex;
+    flex-direction: column;
+    background: aliceblue;
+}
+.patient-profile-row{
+    display: flex;
+    justify-content: space-between;
+    margin: 0.5em 0;
+}
+.patient-profile-heading{
+    font-weight: 700;
+}
+.image-list-wrapper{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.image-list-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.image-list-container img{
+    height: 40em;
+}
+.image-list-container h3{
+    display: inline;    
+    font-size: 1.5em;
+}
+.image-list-container div{
+    font-size: 1.5em;
+}
+.chart-container{
+    text-align: center;
+    font-size: 0.1em !important;
+}
+.no-records{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    width: 100%;
+}
+.display-image-wrapper{
+    height: 100%;
+    padding: 2em;
+}
+.slider-container{
+    width: 45em;
+    margin: auto;
+}
+.display-images{
+    width: 80%;
+    margin: 1em auto;
+    overflow-x: auto;
+    display: flex;
+}
+.display-image-upload, .display-image-clustered{
+    width: 40em;
+    margin: 0 1em;
+    cursor: pointer;
+}
+.modal-image{
+    width: 50vw;
+}
+.current-date{
+    text-align: center;
+}
+.display-details{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;   
+}
+.expected-stage{
+    font-size: 1.5em;
+}
+.expected-stage h3{
+    display: inline-block;
+    margin-right: 0.5em;
+}

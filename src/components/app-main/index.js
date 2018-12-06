@@ -2,6 +2,7 @@ import React from 'react'
 import {Route} from 'react-router-dom'
 import Home from '../home'
 import AddPatient from '../add-patient'
+import PastRecord from '../past_records'
 import Analysis from '../analysis'
 import HomeIcon from '../home-icon'
 import Sidebar from '../sidebar'
@@ -20,9 +21,9 @@ export default class AppMain extends React.Component{
                     <Route path='/brain_tumour' component={Analysis} />
                     <Route path='/brain_stroke' component={Analysis} />
                     <Route path='/skin_cancer' component={Analysis} />
-                    <Route path='/past_records/brain_tumour' component={Analysis} />
-                    <Route path='/past_records/brain_stroke' component={Analysis} />
-                    <Route path='/past_records/skin_cancer' component={Analysis} />
+                    <Route path='/past_records/brain_tumour' component={PastRecord} />
+                    <Route path='/past_records/brain_stroke' component={PastRecord} />
+                    <Route path='/past_records/skin_cancer' component={PastRecord} />
                     <Route path='/add_patient' component={AddPatient} />
                 </div>
             </div>

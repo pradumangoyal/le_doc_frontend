@@ -6,3 +6,6 @@
 .home-container{
     width: calc(100% - 13em);
 }
+.app-wrapper{
+    overflow: hidden;
+}

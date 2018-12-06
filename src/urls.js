@@ -21,3 +21,7 @@ export function urlPostReports(active) {
 export function urlOperate(active, id) {
     return `/${active}/operate/?id=${id}`
 }
+
+export function urlGetPastRecords(active, data) {
+    return `/${active}/list/?username=${data}`
+}
