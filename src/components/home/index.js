@@ -2,7 +2,6 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Icon} from 'antd'
 
-import Sidebar from '../sidebar'
 import './index.css'
 class Home extends React.Component{
     render(){

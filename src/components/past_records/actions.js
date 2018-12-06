@@ -43,7 +43,6 @@ export function setActivePatient(active, patient){
             })
         })
         .catch(err => {
-            console.log(err)
             dispatch({
                 type: 'SET_IMAGE_LIST',
                 payload: {loaded: false, list: {}}

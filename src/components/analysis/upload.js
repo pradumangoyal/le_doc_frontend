@@ -14,7 +14,6 @@ class UploadFile extends React.Component{
         }
     }
     handleChange = (e) => {
-        console.log(e.target.files[0], this.props.patient.patient.id)
         this.setState({
             file: e.target.files[0],
             previewVisible: false,
@@ -56,7 +55,7 @@ class UploadFile extends React.Component{
                         : <img alt="example" style={{ height: '25em' }} src={previewImage}/>
                     }
                     {this.state.file 
-                    ? step == 1 
+                    ? step === 1 
                         ?                     
                         <Tooltip placement='bottom' title='Upload Report'>
                             <Button type="primary" shape="circle" icon="upload" size='large' onClick={this.handleUpload} style={{marginTop: '1em'}}/>

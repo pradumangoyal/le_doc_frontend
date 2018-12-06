@@ -116,12 +116,12 @@ class DisplayImages extends React.Component{
         return(
             <div className='display-image-wrapper'>
             <div className='slider-container'>
-            <Slider marks={result} defaultValue={0} onChange={this.handleChange} value={this.state.value} />
+            <Slider marks={imageList.list.length === 1 ? {} : result} defaultValue={0} onChange={this.handleChange} value={this.state.value} />
             <div className='current-date'>{moment(this.dateToString(this.state.date)).format('MMM Do YYYY, h:mm:ss a')}</div>
             </div>
             <div className='display-images'>
-                <div className='display-image-upload-container'><img src={activeImage.uploaded} className='display-image-upload' onClick={this.showModalUploaded} /></div>
-                <div className='display-image-clustered-container'><img src={activeImage.clustered} className='display-image-clustered' onClick={this.showModalClustered} /></div>
+                <div className='display-image-upload-container'><img src={activeImage.uploaded} className='display-image-upload' alt='uploaded' onClick={this.showModalUploaded} /></div>
+                <div className='display-image-clustered-container'><img src={activeImage.clustered} className='display-image-clustered' alt='clustered' onClick={this.showModalClustered} /></div>
             </div>
             <div className='display-details'>
                 <h3>{moment(activeImage.timestamp).format('MMM Do YYYY, h:mm:ss a')}</h3>

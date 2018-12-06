@@ -74,7 +74,7 @@ class Done extends React.Component{
                     <img src={image.clustered} alt='Result' onClick={this.showModal} />
                     <h3>{moment(image.timestamp).format('MMMM Do YYYY, h:mm:ss a')}</h3>
                     {
-                        analysis == 'skin_cancer' 
+                        analysis === 'skin_cancer' 
                         ? 
                         <div className='chart-container'>
                             <Table columns={columns} dataSource={dataSource} />
@@ -87,8 +87,12 @@ class Done extends React.Component{
                 visible={this.state.visible}
                 onCancel={this.handleCancel}
                 centered
+                style = {{
+                    padding: '0',
+                    display: 'inline-table'
+                }}
                 >
-                    <a href={`http://localhost:8000${image.clustered}`} target='blank'><img src={image.clustered} alt='Result' /></a>
+                    <a href={`http://localhost:8000${image.clustered}`} target='blank'><img src={image.clustered} alt='Result' className='modal-image' /></a>
                 </Modal>
             </div>
         )

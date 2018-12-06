@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux'
-import {Form, Input,message, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete,} from 'antd'
+import {Form, Input,message, Icon, Select, Button, } from 'antd'
 
 import {getCookie} from '../../utils'
 import {addPatient} from '../../actions'
