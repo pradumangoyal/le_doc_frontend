@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import moment from 'moment'
-import {Slider, Modal, Table} from 'antd'
+import {Slider, Modal, Table, Button, message} from 'antd'
 
 class DisplayImages extends React.Component{
     state = {
@@ -9,7 +9,8 @@ class DisplayImages extends React.Component{
         date: Math.floor(moment(this.props.imageList.list[0].timestamp).format('x')),
         activeImage: this.props.imageList.list[0],
         visible: false,
-        previewImage: ''
+        previewImage: '',
+        index: 0
     }
     showModalUploaded = () => {
         this.setState({
@@ -17,8 +18,44 @@ class DisplayImages extends React.Component{
             previewImage: this.state.activeImage.uploaded
         })
     }
-
-
+    handleNext = () => {
+        if(this.state.index < this.props.imageList.list.length-1){
+            const {imageList} = this.props
+            let date = Math.floor(moment(this.props.imageList.list[this.state.index+1].timestamp).format('x'))
+            const step = moment(imageList.list[imageList.list.length-1].timestamp).format('x') - moment(imageList.list[0].timestamp).format('x')
+            const kink = moment(imageList.list[0].timestamp).format('x')
+            let value = Math.floor(date)-Math.floor(kink)
+            value = value/step
+            value = Math.floor(value*100)
+            this.setState(prevState => ({
+                index: prevState.index+1,
+                activeImage: this.props.imageList.list[prevState.index+1],
+                date: date,
+                value: value
+            }))}
+        else{
+            message.error('Max limit reached',2)
+        }
+    }
+    handlePrevious = () => {
+        if(this.state.index > 0){
+            const {imageList} = this.props
+            let date = Math.floor(moment(this.props.imageList.list[this.state.index-1].timestamp).format('x'))
+            const step = moment(imageList.list[imageList.list.length-1].timestamp).format('x') - moment(imageList.list[0].timestamp).format('x')
+            const kink = moment(imageList.list[0].timestamp).format('x')
+            let value = Math.floor(date)-Math.floor(kink)
+            value = value/step
+            value = Math.floor(value*100)
+            this.setState(prevState => ({
+                index: prevState.index-1,
+                activeImage: this.props.imageList.list[prevState.index-1],
+                date: date,
+                value: value
+            }))}
+        else{
+            message.error('Min limit reached',2)
+        }
+    }
     showModalClustered = () => {
         this.setState({
             visible: true,
@@ -43,7 +80,8 @@ class DisplayImages extends React.Component{
         this.setState({
             value: value,
             date: date,
-            activeImage: this.getIdJustBefore(date)
+            activeImage: this.getIdJustBefore(date).list,
+            index: this.getIdJustBefore(date).index
         })
     }
     dateToString = (x) => {
@@ -54,13 +92,13 @@ class DisplayImages extends React.Component{
         const {imageList} = this.props
         for (let i=0; i<imageList.list.length; i++){
             if(Math.floor(moment(imageList.list[i].timestamp).format('x'))>x){
-                return imageList.list[i-1]
+                return {index: i-1 ,list: imageList.list[i-1]}
             }}
-            return(imageList.list[imageList.list.length-1])
+            return({index: imageList.list.length-1,list: imageList.list[imageList.list.length-1]})
         }
     render(){     
         const {imageList, pastRecords} = this.props
-        const {activeImage, previewImage} = this.state
+        const {activeImage, previewImage, index} = this.state
         const marks = imageList.list.map((x, index) => {
             return ({
                 // 'label': moment(x.timestamp).format('MMM Do YYYY, h:mm:ss a'),
@@ -116,7 +154,13 @@ class DisplayImages extends React.Component{
         return(
             <div className='display-image-wrapper'>
             <div className='slider-container'>
-            <Slider marks={imageList.list.length === 1 ? {} : result} defaultValue={0} onChange={this.handleChange} value={this.state.value} />
+                <div className='slider-next-back'>
+                    <Button type='primary' disabled={index===0} icon='left' onClick={this.handlePrevious} shape='circle' />
+                    <div className='sider-around'>
+                        <Slider marks={imageList.list.length === 1 ? {} : result} defaultValue={0} onChange={this.handleChange} value={this.state.value} />
+                    </div>
+                    <Button type='primary' disabled={index===imageList.list.length-1} icon='right' onClick={this.handleNext} shape='circle' />
+                </div>
             <div className='current-date'>{moment(this.dateToString(this.state.date)).format('MMM Do YYYY, h:mm:ss a')}</div>
             </div>
             <div className='display-images'>
