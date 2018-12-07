@@ -45,7 +45,7 @@ class AddPatientForm extends React.Component{
         name: this.state.name,
         age: this.state.age,
         gender: this.state.gender,
-        contact: this.state.gender,
+        contact: this.state.contact,
         blood_group: this.state.blood_group
         }
         let headers = {
