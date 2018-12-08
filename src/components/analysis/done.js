@@ -40,46 +40,46 @@ class Done extends React.Component{
         const dataSource = [{
             key: '1',
             component: 'Melanoma',
-            probability: Number(image.melanoma),
+            probability: Number(image.data.melanoma),
           },{
             key: '2',
             component: 'Vascular',
-            probability: Number(image.vascular),
+            probability: Number(image.data.vascular),
           },{
             key: '3',
             component: 'Nevus',
-            probability: Number(image.nevus),
+            probability: Number(image.data.nevus),
           },{
             key: '4',
             component: 'Dermatofibroma',
-            probability: Number(image.dermatofibroma),
+            probability: Number(image.data.dermatofibroma),
           },{
             key: '5',
             component: 'Bowen',
-            probability: Number(image.bowen),
+            probability: Number(image.data.bowen),
           },{
             key: '6',
             component: 'Keratoses',
-            probability: Number(image.keratoses),
+            probability: Number(image.data.keratoses),
           },{
             key: '7',
             component: 'Carcinoma',
-            probability: Number(image.carcinoma),
+            probability: Number(image.data.carcinoma),
           },];
           
         return(
             <div className='done-wrapper'>
                 <PatientProfile />
                 <div className='done-container'>
-                    <img src={image.clustered} alt='Result' onClick={this.showModal} />
-                    <h3>{moment(image.timestamp).format('MMMM Do YYYY, h:mm:ss a')}</h3>
+                    <img src={image.data.clustered} alt='Result' onClick={this.showModal} />
+                    <h3>{moment(image.data.timestamp).format('MMMM Do YYYY, h:mm:ss a')}</h3>
                     {
                         analysis === 'skin_cancer' 
                         ? 
                         <div className='chart-container'>
                             <Table columns={columns} dataSource={dataSource} />
                         </div> 
-                        : <div><h3>Expected Stage: </h3>{image.stage}</div>
+                        : <div><h3>Expected Stage: </h3>{image.data.stage}</div>
                     }
                 </div>
                 <Modal
@@ -92,7 +92,7 @@ class Done extends React.Component{
                     display: 'inline-table'
                 }}
                 >
-                    <a href={`http://localhost:8000${image.clustered}`} target='blank'><img src={image.clustered} alt='Result' className='modal-image' /></a>
+                    <a href={`http://localhost:8000${image.data.clustered}`} target='blank'><img src={image.data.clustered} alt='Result' className='modal-image' /></a>
                 </Modal>
             </div>
         )

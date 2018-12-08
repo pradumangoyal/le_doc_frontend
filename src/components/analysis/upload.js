@@ -27,7 +27,7 @@ class UploadFile extends React.Component{
         this.props.AddImage(this.props.analysis, formData)
     }
     handleAnalyse = () => {
-        this.props.AnalyseImage(this.props.analysis, this.props.image.id)
+        this.props.AnalyseImage(this.props.analysis, this.props.image.data.id)
     }
     render(){
         const { previewImage, file } = this.state;
@@ -58,11 +58,11 @@ class UploadFile extends React.Component{
                     ? step === 1 
                         ?                     
                         <Tooltip placement='bottom' title='Upload Report'>
-                            <Button type="primary" shape="circle" icon="upload" size='large' onClick={this.handleUpload} style={{marginTop: '1em'}}/>
+                            <Button type="primary" shape="circle" icon={this.props.image.loading ? "loading" : "upload"} spin={this.props.image.loading} size='large' onClick={this.handleUpload} style={{marginTop: '1em'}}/>
                         </Tooltip>
                         :  
                         <Tooltip placement='bottom' title='Analyse Report'>
-                            <Button type="primary" shape="circle" icon="search" size='large' onClick={this.handleAnalyse} style={{marginTop: '1em'}} />
+                            <Button type="primary" shape="circle" icon={this.props.image.loading ? "loading" : "search"} spin={this.props.image.loading} size='large' onClick={this.handleAnalyse} style={{marginTop: '1em'}} />
                         </Tooltip>
                     : null
                     }

@@ -58,39 +58,47 @@ export const addImage = (active, data) => {
       "X-Requested-With": "XMLHttpRequest"
     }
     return dispatch => {
-      axios.post(urlPostReports(active), data, { headers: headers })
-      .then(res => {
         dispatch({
-            type: 'SET_IMAGE',
-            payload: res.data
+            type: 'SET_IMAGE_LOADING',
+            payload: false
+            })
+        axios.post(urlPostReports(active), data, { headers: headers })
+        .then(res => {
+            dispatch({
+                type: 'SET_IMAGE',
+                payload: {loading: false, data: res.data}
+            })
+            dispatch({
+                type: 'CHANGE_ANALYSIS_STEP',
+                payload: 2
+            })
+            message.success(`Image uploaded successfully`, 2)
         })
-        dispatch({
-            type: 'CHANGE_ANALYSIS_STEP',
-            payload: 2
+        .catch(err => {
+            message.error('Some error occured', 2)
         })
-        message.success(`Image uploaded successfully`, 2)
-      })
-      .catch(err => {
-        message.error('Some error occured', 2)
-      })
     }
   }
 
   export const analyseImage = (active, id) => {
-    return dispatch => {  
-    axios.get(urlOperate(active, id))
-      .then(res => {
+    return dispatch => { 
         dispatch({
-            type: 'SET_IMAGE',
-            payload: res.data
+            type: 'SET_IMAGE_LOADING',
+            payload: true
+        }) 
+        axios.get(urlOperate(active, id))
+        .then(res => {
+            dispatch({
+                type: 'SET_IMAGE',
+                payload: {loading: false, data: res.data}
+            })
+            dispatch({
+                type: 'CHANGE_ANALYSIS_STEP',
+                payload: 3
+            })
         })
-        dispatch({
-            type: 'CHANGE_ANALYSIS_STEP',
-            payload: 3
+        .catch(err => {
+            message.error('Some error occured', 2)
         })
-      })
-      .catch(err => {
-          message.error('Some error occured', 2)
-      })
     }
   }
