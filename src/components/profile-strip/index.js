@@ -9,7 +9,7 @@ class ProfileStrip extends React.Component{
             <div className='profile-strip-wrapper'>
                 <div>Dr. {whoAmI.loaded && whoAmI.user.first_name} {whoAmI.loaded && whoAmI.user.last_name}</div>
                 <div>{whoAmI.loaded && whoAmI.user.email}</div>
-                <div>Toatal Patients: {patients.loaded && patients.patients.length}</div>
+                <div>Total Patients: {patients.loaded && patients.patients.length}</div>
             </div>
         )
     }
