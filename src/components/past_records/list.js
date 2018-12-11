@@ -96,8 +96,100 @@ class DisplayImages extends React.Component{
             }}
             return({index: imageList.list.length-1,list: imageList.list[imageList.list.length-1]})
         }
+    
+    columns = () => {
+        const {pastRecords} = this.props
+        if(pastRecords === 'skin_cancer')
+        {
+            return [{
+                title: 'Component',
+                dataIndex: 'component',
+                key: 'component',
+            }, {
+                title: 'Percentage',
+                dataIndex: 'probability',
+                key: 'probability',
+            }]
+        }
+        else{
+            return [{
+                title: '',
+                dataIndex: 'component',
+                key: 'component',
+            }, {
+                title: 'Percentage',
+                dataIndex: 'probability',
+                key: 'probability',
+            }]
+        }
+    }
+
+    dataSource = () => {
+        const {activeImage} = this.state
+        const {pastRecords} = this.props
+        if(pastRecords === 'skin_cancer')
+        {
+            return [{
+                key: '1',
+                component: 'Melanoma',
+                probability: Number(activeImage.melanoma),
+                },{
+                key: '2',
+                component: 'Vascular',
+                probability: Number(activeImage.vascular),
+                },{
+                key: '3',
+                component: 'Nevus',
+                probability: Number(activeImage.nevus),
+                },{
+                key: '4',
+                component: 'Dermatofibroma',
+                probability: Number(activeImage.dermatofibroma),
+                },{
+                key: '5',
+                component: 'Bowen',
+                probability: Number(activeImage.bowen),
+                },{
+                key: '6',
+                component: 'Keratoses',
+                probability: Number(activeImage.keratoses),
+                },{
+                key: '7',
+                component: 'Carcinoma',
+                probability: Number(activeImage.carcinoma),
+                },].sort(function(a,b){
+                    return b.probability - a.probability
+                });
+        }
+        else if(pastRecords === 'brain_tumour'){
+            return [{
+                key: '1',
+                component: 'Tumour Area(%)',
+                probability: Number(activeImage.stage.split(',')[0]),
+            },{
+                key: '2',
+                component: 'Growth Area(%)',
+                probability: Number(activeImage.stage.split(',')[1]),
+            },{
+                key: '3',
+                component: 'Type',
+                probability: Number(activeImage.stage.split(',')[2]),
+            },]
+        }
+        else{
+            return [{
+                key: '1',
+                component: 'Expected Transient Area(%)',
+                probability: Number(activeImage.stage.split(',')[0]),
+            },{
+                key: '2',
+                component: 'Stroke Area',
+                probability: Number(activeImage.stage.split(',')[1]),
+            },]
+        }
+    }    
     render(){     
-        const {imageList, pastRecords} = this.props
+        const {imageList} = this.props
         const {activeImage, previewImage, index} = this.state
         const marks = imageList.list.map((x, index) => {
             return ({
@@ -111,46 +203,6 @@ class DisplayImages extends React.Component{
         for (let i=0; i<marks.length; i++){
             result[marks[i].value] = marks[i].label
         }
-
-        const columns = [{
-            title: 'Component',
-            dataIndex: 'component',
-            key: 'component',
-        }, {
-            title: 'Probability',
-            dataIndex: 'probability',
-            key: 'probability',
-        }]
-
-        const dataSource = [{
-            key: '1',
-            component: 'Melanoma',
-            probability: Number(activeImage.melanoma),
-          },{
-            key: '2',
-            component: 'Vascular',
-            probability: Number(activeImage.vascular),
-          },{
-            key: '3',
-            component: 'Nevus',
-            probability: Number(activeImage.nevus),
-          },{
-            key: '4',
-            component: 'Dermatofibroma',
-            probability: Number(activeImage.dermatofibroma),
-          },{
-            key: '5',
-            component: 'Bowen',
-            probability: Number(activeImage.bowen),
-          },{
-            key: '6',
-            component: 'Keratoses',
-            probability: Number(activeImage.keratoses),
-          },{
-            key: '7',
-            component: 'Carcinoma',
-            probability: Number(activeImage.carcinoma),
-          },];
         return(
             <div className='display-image-wrapper'>
             <div className='slider-container'>
@@ -169,9 +221,7 @@ class DisplayImages extends React.Component{
             </div>
             <div className='display-details'>
                 <h3>{moment(activeImage.timestamp).format('MMM Do YYYY, h:mm:ss a')}</h3>
-                    {pastRecords === 'skin_cancer'
-                    ? <div><Table columns={columns} dataSource={dataSource} /></div>
-                    : <div className='expected-stage'><h3>Expected Stage: </h3>{activeImage.stage}</div>
+                    <div><Table columns={this.columns()} dataSource={this.dataSource()} /></div>
                 }
             </div>
 

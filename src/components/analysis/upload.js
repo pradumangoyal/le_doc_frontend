@@ -31,7 +31,7 @@ class UploadFile extends React.Component{
     }
     render(){
         const { previewImage, file } = this.state;
-        const {step} = this.props
+        const {step, analysis} = this.props
         return(
             <div className='upload-wrapper'>
                 <PatientProfile />
@@ -52,7 +52,7 @@ class UploadFile extends React.Component{
                             style={{display: 'none'}}
                         />
                         </React.Fragment>
-                        : <img alt="example" style={{ height: '25em' }} src={previewImage}/>
+                        : analysis === 'skin_cancer' ? <img alt="example" style={{ height: '25em' }} src={previewImage}/> : <div className='upload-button zip'><Icon type="paper-clip" /></div>
                     }
                     {this.state.file 
                     ? step === 1 
