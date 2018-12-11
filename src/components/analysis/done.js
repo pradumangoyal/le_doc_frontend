@@ -99,7 +99,7 @@ class Done extends React.Component{
             },{
                 key: '3',
                 component: 'Type',
-                probability: Number(image.data.stage.split(',')[2]),
+                probability: (image.data.stage.split(',')[2]),
             },]
         }
         else{

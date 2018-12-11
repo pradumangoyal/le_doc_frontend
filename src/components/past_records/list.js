@@ -173,7 +173,7 @@ class DisplayImages extends React.Component{
             },{
                 key: '3',
                 component: 'Type',
-                probability: Number(activeImage.stage.split(',')[2]),
+                probability: (activeImage.stage.split(',')[2]),
             },]
         }
         else{
@@ -222,7 +222,6 @@ class DisplayImages extends React.Component{
             <div className='display-details'>
                 <h3>{moment(activeImage.timestamp).format('MMM Do YYYY, h:mm:ss a')}</h3>
                     <div><Table columns={this.columns()} dataSource={this.dataSource()} /></div>
-                }
             </div>
 
                 <Modal
