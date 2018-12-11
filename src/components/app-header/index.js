@@ -25,7 +25,7 @@ class AppHeader extends React.Component{
                     <a href='/'>
                         <Icon type="plus" />
                     </a>
-                    <span><a href='/'>doc_doc</a></span>
+                    <span><a href='/'>LeDoc</a></span>
                 </div>
                 <div className='avatar'>
                 {whoAmI.loaded 
