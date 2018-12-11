@@ -87,6 +87,10 @@
     overflow-x: auto;
     display: flex;
 }
+.display-image-upload-container{
+    display: flex;
+    align-items: center;
+}
 .display-image-upload, .display-image-clustered{
     width: 40em;
     margin: 0 1em;
