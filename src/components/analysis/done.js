@@ -24,48 +24,98 @@ class Done extends React.Component{
         visible: false,
     });}
 
-    render(){
+    columns = () => {
+        const {analysis} = this.props
+        if(analysis === 'skin_cancer')
+        {
+            return [{
+                title: 'Component',
+                dataIndex: 'component',
+                key: 'component',
+            }, {
+                title: 'Percentage',
+                dataIndex: 'probability',
+                key: 'probability',
+            }]
+        }
+        else{
+            return [{
+                title: '',
+                dataIndex: 'component',
+                key: 'component',
+            }, {
+                title: 'Percentage',
+                dataIndex: 'probability',
+                key: 'probability',
+            }]
+        }
+    }
+
+    dataSource = () => {
         const {image, analysis} = this.props
-
-        const columns = [{
-            title: 'Component',
-            dataIndex: 'component',
-            key: 'component',
-        }, {
-            title: 'Probability',
-            dataIndex: 'probability',
-            key: 'probability',
-        }]
-
-        const dataSource = [{
-            key: '1',
-            component: 'Melanoma',
-            probability: Number(image.data.melanoma),
-          },{
-            key: '2',
-            component: 'Vascular',
-            probability: Number(image.data.vascular),
-          },{
-            key: '3',
-            component: 'Nevus',
-            probability: Number(image.data.nevus),
-          },{
-            key: '4',
-            component: 'Dermatofibroma',
-            probability: Number(image.data.dermatofibroma),
-          },{
-            key: '5',
-            component: 'Bowen',
-            probability: Number(image.data.bowen),
-          },{
-            key: '6',
-            component: 'Keratoses',
-            probability: Number(image.data.keratoses),
-          },{
-            key: '7',
-            component: 'Carcinoma',
-            probability: Number(image.data.carcinoma),
-          },];
+        if(analysis === 'skin_cancer')
+        {
+            return [{
+                key: '1',
+                component: 'Melanoma',
+                probability: Number(image.data.melanoma),
+              },{
+                key: '2',
+                component: 'Vascular',
+                probability: Number(image.data.vascular),
+              },{
+                key: '3',
+                component: 'Nevus',
+                probability: Number(image.data.nevus),
+              },{
+                key: '4',
+                component: 'Dermatofibroma',
+                probability: Number(image.data.dermatofibroma),
+              },{
+                key: '5',
+                component: 'Bowen',
+                probability: Number(image.data.bowen),
+              },{
+                key: '6',
+                component: 'Keratoses',
+                probability: Number(image.data.keratoses),
+              },{
+                key: '7',
+                component: 'Carcinoma',
+                probability: Number(image.data.carcinoma),
+              },].sort(function(a,b){
+                  return b.probability - a.probability
+              });
+        }
+        else if(analysis === 'brain_tumour'){
+            return [{
+                key: '1',
+                component: 'Tumour Area(%)',
+                probability: Number(image.data.stage.split(',')[0]),
+            },{
+                key: '2',
+                component: 'Growth Area(%)',
+                probability: Number(image.data.stage.split(',')[1]),
+            },{
+                key: '3',
+                component: 'Type',
+                probability: Number(image.data.stage.split(',')[2]),
+            },]
+        }
+        else{
+            return [{
+                key: '1',
+                component: 'Expected Transient Area(%)',
+                probability: Number(image.data.stage.split(',')[0]),
+            },{
+                key: '2',
+                component: 'Stroke Area',
+                probability: Number(image.data.stage.split(',')[1]),
+            },]
+        }
+    }
+    render(){
+        const {image} = this.props
           
         return(
             <div className='done-wrapper'>
@@ -74,12 +124,9 @@ class Done extends React.Component{
                     <img src={image.data.clustered} alt='Result' onClick={this.showModal} />
                     <h3>{moment(image.data.timestamp).format('MMMM Do YYYY, h:mm:ss a')}</h3>
                     {
-                        analysis === 'skin_cancer' 
-                        ? 
                         <div className='chart-container'>
-                            <Table columns={columns} dataSource={dataSource} />
+                            <Table columns={this.columns()} dataSource={this.dataSource()} />
                         </div> 
-                        : <div><h3>Expected Stage: </h3>{image.data.stage}</div>
                     }
                 </div>
                 <Modal
